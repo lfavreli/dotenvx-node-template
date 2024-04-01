@@ -1,0 +1,28 @@
+{
+  "name": "dotenvx-node-template",
+  "version": "1.0.0",
+  "description": "A minimal dotenvx setup in a Node.js ecosystem",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "dotenvx run -- node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfavreli/dotenvx-node-template.git"
+  },
+  "keywords": [
+    "dotenvx",
+    "environment",
+    "variables",
+    "configuration",
+    "node",
+    "railway"
+  ],
+  "author": "@lfavreli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lfavreli/dotenvx-node-template/issues"
+  },
+  "homepage": "https://github.com/lfavreli/dotenvx-node-template#readme"
+}
