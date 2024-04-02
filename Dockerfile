@@ -18,5 +18,5 @@ RUN npm install --production
 # Copy the rest of the application code
 COPY . .
 
-# Running the server
+# Running the Node.js server with dotenvx that inject environment variables at runtime
 CMD ["dotenvx", "run", "--", "node", "index.js"]

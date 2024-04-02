@@ -1,7 +1,7 @@
 import http from 'http';
 
 const server = http.createServer((_req, res) => {
-    // Create a custom message based on the environment variable 'NAME' 
+    // Create a custom message based on the environment variable 'NAME' and 'ENVIRONMENT'
     const message = `Hello ${process.env.NAME ?? 'world'} from ${process.env.ENVIRONMENT ?? 'space'}!`;
 
     // Display this custom message

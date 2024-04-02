@@ -2,11 +2,11 @@
 
 Welcome to the Railway `dotenvx` Node.js template!
 
-This example provides a minimal a setup for managing environment variables using the [dotenvx](https://dotenvx.com/) library in a Node.js environment (_e.g. http or express server_) deployed on Railway's platform-as-a-service (PaaS).
+This example provides a minimal setup for managing environment variables using the [dotenvx](https://dotenvx.com/) library in a Node.js environment (_e.g. http or express server_) deployed on Railway's platform-as-a-service (PaaS).
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/zXEiVF?referralCode=lfavreli)
 
-## ⚠️ Disclaimer 
+## ⚠️ Disclaimer
 
 This is a demonstration template only. <br />
 The `.env`, `.env.production`, and `.env.keys` files should not be commited in a real project.
@@ -32,7 +32,7 @@ The `.env`, `.env.production`, and `.env.keys` files should not be commited in a
 - **Development** : <br />
     `dotenv://:key_00a4936b5c6958296d2703713334ffc3b27428d87e80705530cb04617dcdbe23@dotenvx.com/vault/.env.vault?environment=development`
 
-3. Click on the "public domain" link provided by Railway and watch the variables being loaded from the server:
+3. Click on the "public domain" link provided by Railway to observe the variables being loaded from the server. Please note that there may be a delay of 2-3 minutes for the DNS to become aware of this new address.
 
 ```js
 `Hello ${process.env.NAME ?? 'world'} from ${process.env.ENVIRONMENT ?? 'space'}!`;
@@ -53,11 +53,9 @@ npm install @dotenvx/dotenvx -g
 
 2. Add (or uncomment) `.env*` files in the .gitignore to prevent them from being tracked, with the exception of `.env.vault`:
 
-```diff
--#.env*
--#!.env.vault
-+.env*
-+!.env.vault
+```text
+.env*
+!.env.vault
 ```
 
 Then, at the root of the project, make sure you no longer track these files:
@@ -75,14 +73,17 @@ If there are, you can add and commit these changes.
 rm .env.keys .env.vault
 
 # Encrypt .env and .env.production files
-dotenvx encrypt -f .env && dotenvx encrypt -f .env.production
+dotenvx encrypt -f .env
+dotenvx encrypt -f .env.production
 ```
 
-4. Finally, in Railway, update the `DOTENV_KEY` variable with the value of the new key generated: `DOTENV_VAULT_DEVELOPMENT` or `DOTENV_VAULT_PRODUCTION` depending on the variables you want to load.
+4. Finally, in Railway, update the `DOTENV_KEY` variable with the value of the newly generated key: either `DOTENV_VAULT_DEVELOPMENT` or `DOTENV_VAULT_PRODUCTION`, depending on the variables you wish to load.
 
-And that's it! Your environment files are no longer tracked and you have just regenerated the encrypted file and decryption keys.
+---
 
-Each time you add, delete or modify environment variables in your `.env` files, re-encrypt the file and deploy the new vault. It's that simple!
+And that's it! Your environment files are no longer tracked, and you have just regenerated the encrypted file and decryption keys.
+
+Each time you add, delete, or modify environment variables in your `.env` files, re-encrypt the file and deploy the new vault. It's that simple!
 
 ## ⚒️ Useful commands
 
@@ -106,11 +107,15 @@ dotenvx --help
 
 ## 📄 Learn more
 
-`dotenvx` :
+`dotenvx`:
 - [Documentation](https://dotenvx.com/docs)
 - [Railway _Express.js_ deployment tutorial](https://dotenvx.com/docs/platforms/railway)
 - [Github Repository](https://github.com/dotenvx/dotenvx)
 
+`dotenvx-node-template`:
+- [README with instructions](https://github.com/lfavreli/dotenvx-node-template/blob/master/README.md)
+- [Github Repository](https://github.com/lfavreli/dotenvx-node-template)
+- [Open an issue](https://github.com/lfavreli/dotenvx-node-template/issues)
 
 ## Contribution
 
