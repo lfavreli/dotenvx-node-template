@@ -1,11 +1,12 @@
 {
   "name": "dotenvx-node-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A minimal dotenvx setup in a Node.js ecosystem",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "dotenvx run -- node index.js"
+    "start": "dotenvx run -- node index.js",
+    "start:prod": "cross-env DOTENV_PRIVATE_KEY_PRODUCTION='706afc89eaa09ea9441d0f18f7c2fbbb6c77a201abf47aaa3a607e499a52c51d' npm run start"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/lfavreli/dotenvx-node-template/issues"
   },
-  "homepage": "https://github.com/lfavreli/dotenvx-node-template#readme"
+  "homepage": "https://github.com/lfavreli/dotenvx-node-template#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }

@@ -1,6 +1,5 @@
-# Ignore dotenvx environment variable files, except vault
-#.env*
-#!.env.vault
+# Ignore dotenvx private keys file
+#.env.keys
 
 # Dependency directories
 node_modules/
