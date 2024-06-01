@@ -9,7 +9,7 @@ This example provides a minimal setup for managing environment variables using t
 ## ⚠️ Disclaimer
 
 This is a demonstration template only. <br />
-The `.env`, `.env.production`, and `.env.keys` files should not be commited in a real project.
+The `.env.keys` file should not be commited in a real project.
 
 (_cf. [Development and production use](#-development-and-production-use)_)
 
@@ -24,21 +24,28 @@ The `.env`, `.env.production`, and `.env.keys` files should not be commited in a
 ## 🚀 Use as it stands
 
 1. Click the 'Deploy on Railway' button 👆
-2. To load the appropriate environment variables, choose the right decryption key (`DOTENV_KEY`):
 
-- **Production** (default): <br />
-    `dotenv://:key_28e238f7048570c43de05869e4e3c36003e4c88fa3b7582a69bbc49dc73321e5@dotenvx.com/vault/.env.vault?environment=production`
+2. Deploy with the pre-configured environment variables values (_production_):
 
-- **Development** : <br />
-    `dotenv://:key_00a4936b5c6958296d2703713334ffc3b27428d87e80705530cb04617dcdbe23@dotenvx.com/vault/.env.vault?environment=development`
+```text
+DOTENV_PRIVATE_KEY_PRODUCTION=706afc89eaa09ea9441d0f18f7c2fbbb6c77a201abf47aaa3a607e499a52c51d
+```
 
-3. Click on the "public domain" link provided by Railway to observe the variables being loaded from the server. Please note that there may be a delay of 2-3 minutes for the DNS to become aware of this new address.
+3. Click on the "public domain" link provided by Railway to observe the variables being loaded from the server.
 
 ```js
 `Hello ${process.env.NAME ?? 'world'} from ${process.env.ENVIRONMENT ?? 'space'}!`;
 ```
 
 There you go! 💪
+
+Please, note that there may be a delay of 2-3 minutes for the DNS to become aware of this new address. If this doesn't work after a few minutes, in the settings, delete the public address (_Public Networking_) and regenerate one.
+
+4. (Bonus) To use development environment variables, change the name and value of the private key:
+
+```text
+DOTENV_PRIVATE_KEY=78ef7c8b904d674d8a2e468714e4b770a3c7c76b3c09cdfa1bc80bcd862f0036
+```
 
 ## 💻 Development and production use
 
@@ -51,14 +58,13 @@ npm install @dotenvx/dotenvx -g
 > Install globally as a cli to unlock dotenv for ANY language, framework, or platform. 💥
 > I am using (and recommending) this approach going forward. – [motdotla](https://github.com/motdotla)
 
-2. Add (or uncomment) `.env*` files in the .gitignore to prevent them from being tracked, with the exception of `.env.vault`:
+2. Add (or uncomment) the `.env.keys` file in the `.gitignore` to prevent it from being tracked:
 
 ```text
-.env*
-!.env.vault
+.env.keys
 ```
 
-Then, at the root of the project, make sure you no longer track these files:
+Then, at the root of the project, make sure you no longer track this file:
 
 ```bash
 git rm -r --cached .
@@ -66,37 +72,50 @@ git rm -r --cached .
 
 If there are, you can add and commit these changes.
 
-3. Create your own keys and generated vault file (`.env.key` & `.env.vault`):
+3. Encrypt your secrets and generate your own private keys file (`.env.key`):
 
-```bash
-# Remove existing .env.keys .env.vault files
-rm .env.keys .env.vault
+    3.1. Remove existing `.env.keys` file:
 
-# Encrypt .env and .env.production files
-dotenvx encrypt -f .env
-dotenvx encrypt -f .env.production
-```
+    ```bash
+    rm .env.keys
+    ```
 
-4. Finally, in Railway, update the `DOTENV_KEY` variable with the value of the newly generated key: either `DOTENV_VAULT_DEVELOPMENT` or `DOTENV_VAULT_PRODUCTION`, depending on the variables you wish to load.
+    3.2 Setting up your custom `.env` and `.env.production` files:
+
+    ```text
+    NAME=YOUR_NAME
+    ENVIRONMENT=YOUR_ENV
+    YOUR_CUSTOM_KEY=YOUR_CUSTOM_VALUE
+    ```
+
+    Make sure you don't have a `DOTENV_PUBLIC_KEY` variable in your environment files to generate new keys.
+
+    3.3. Convert created environment files into encrypted files:
+
+    ```bash
+    dotenvx convert -f .env
+    dotenvx convert -f .env.production
+    ```
+
+4. Finally, in Railway, update the variable with the value of the newly generated key: either `DOTENV_PRIVATE_KEY` or `DOTENV_PRIVATE_KEY_PRODUCTION`, depending on the variables you wish to load.
 
 ---
 
-And that's it! Your environment files are no longer tracked, and you have just regenerated the encrypted file and decryption keys.
-
-Each time you add, delete, or modify environment variables in your `.env` files, re-encrypt the file and deploy the new vault. It's that simple!
+And that's it! You've just regenerated the encrypted file and decryption keys. Each time you add, delete, or modify environment variables in your `.env` files, check that the values are encrypted before deploying the file on your server. It's that simple!
 
 ## ⚒️ Useful commands
 
-* Encryption of file containing environment variables:
+* Retrieve initial value(s) from and encrypted `.env` file:
 
 ```bash
-dotenvx encrypt [-f,--env-file] [directory]
+dotenvx get {KEY} [-f,--env-file]                   # Return a single value
+dotenvx get [-f,--env-file] [-pp,--pretty-print]    # Return all values
 ```
 
-* Creation of a pre-commit hook to check that files are not being tracked:
+* Set a new encrypted key/value:
 
 ```bash
-dotenvx precommit --install
+dotenvx set {KEY} {VALUE} --encrypt [-f,--env-file]
 ```
 
 * More information and details about the CLI:
