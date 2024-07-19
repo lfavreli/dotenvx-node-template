@@ -8,7 +8,7 @@ This example provides a minimal setup for managing environment variables using t
 
 ## ⚠️ Disclaimer
 
-This is a demonstration template only. <br />
+This is a demonstration template. <br />
 The `.env.keys` file should not be commited in a real project.
 
 (_cf. [Development and production use](#-development-and-production-use)_)
@@ -90,11 +90,11 @@ If there are, you can add and commit these changes.
 
     Make sure you don't have a `DOTENV_PUBLIC_KEY` variable in your environment files to generate new keys.
 
-    3.3. Convert created environment files into encrypted files:
+    3.3. Encrypt created environment files:
 
     ```bash
-    dotenvx convert -f .env
-    dotenvx convert -f .env.production
+    dotenvx encrypt -f .env
+    dotenvx encrypt -f .env.production
     ```
 
 4. Finally, in Railway, update the variable with the value of the newly generated key: either `DOTENV_PRIVATE_KEY` or `DOTENV_PRIVATE_KEY_PRODUCTION`, depending on the variables you wish to load.
@@ -115,7 +115,13 @@ dotenvx get [-f,--env-file] [-pp,--pretty-print]    # Return all values
 * Set a new encrypted key/value:
 
 ```bash
-dotenvx set {KEY} {VALUE} --encrypt [-f,--env-file]
+dotenvx set {KEY} {VALUE} [-f,--env-file]
+```
+
+* Decrypt an encrypted environment file:
+
+```bash
+dotenvx decrypt [-f,--env-file] [--stdout]
 ```
 
 * More information and details about the CLI:
